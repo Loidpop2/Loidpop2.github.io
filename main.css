@@ -1,0 +1,33 @@
+.quicksand {
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+}
+
+p.title {
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 25px;
+}
+
+p.main {
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 12px;
+}
+
+div.divider {
+    width: 100%; 
+    height: 50px;
+}
+
+body {
+    padding: 10px;
+    padding-top: 30px;
+    background-image:radial-gradient(circle at -10px -10px in hsl shorter hue, #ffffff 20%, #000000 125%);
+}
