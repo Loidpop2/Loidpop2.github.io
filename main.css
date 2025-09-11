@@ -104,7 +104,10 @@ html {
 }
 
 body {
+    width: 100%;
+    height: 100%;
     display: inline;
+    position: static;
     padding:0px;
     background-image:radial-gradient(circle at 0px 0px, #ffffff 20%, #000000 125%);
 }
