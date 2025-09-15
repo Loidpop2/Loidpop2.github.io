@@ -111,7 +111,58 @@ div.divider {
 
 div.big-divider {
     width: 100%; 
-    height: 2000px;
+    height: 700px;
+}
+
+div.search {
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 12px;
+    text-align: center;
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    border-radius: 8px;
+    display:inline-flex;
+    position: relative;
+    color:#d7dee0;
+    text-align:left;
+    accent-color:#d7dee0;
+    background-color: #393939;
+    width:80%;
+    height:32px;
+}
+
+img.search-icon {
+    width: auto;
+    height: auto;
+    display: inline-flex;
+    position: relative;
+    filter: invert(70%);
+}
+
+input.text {
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 12px;
+    padding-left:20px;
+    height:90%;
+    width:95%;
+    display:inline-flex;
+    color:#d7dee0;
+    text-align:left;
+    accent-color:#d7dee0;
+    background-color: #393939;
+    border: 0px;
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
 }
 
 div.blank {

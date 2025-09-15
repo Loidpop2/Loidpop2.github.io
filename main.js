@@ -13,3 +13,20 @@ function hotbar_backgroundSelector() {
     }
     if (chosen == false) { document.getElementsByClassName("hotbar-button")[0].className = "hotbar-button-this"; }
 }
+
+function searchbar_products() {
+    var articles = ["Unity_how_to/", "About_me"];
+    myInput = document.getElementById("search-products")
+    myInput.addEventListener('input', function(event) {
+        const currentValue = event.target.value;
+        for (var i = 0; i < articles.length; i++ ) {
+            
+        } 
+    });
+}
+
+function page() {
+    hotbar_backgroundSelector();
+    searchbar_products();
+}
+
