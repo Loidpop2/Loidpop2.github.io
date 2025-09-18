@@ -22,12 +22,15 @@ nav.hotbar {
     overflow-x: scroll;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    scrollbar-color: transparent;
+    scrollbar-base-color: transparent;
 }
 
 p.title {
     font-family: "Quicksand", sans-serif;
     font-optical-sizing: auto;
-    font-weight: 300;
+    font-weight: 350;
     font-style: normal;
     font-size: 25px;
     padding-top: 40px;
@@ -87,6 +90,7 @@ a.hotbar-button {
     accent-color:#d7dee0;
     background-color: #000000;
     margin-right:6px;
+    margin-right:37px;
 }
 
 a.hotbar-button-this {
@@ -215,6 +219,7 @@ div.blog-browser {
     overflow-x: scroll;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
 }
 
 div.blog-browser a {
@@ -272,7 +277,6 @@ body {
     background-attachment: fixed;
     background-position: center center;
     overflow:auto;
-    overscroll-behavior: none;
 }
 
 html {
