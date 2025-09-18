@@ -24,18 +24,15 @@ function searchbar_products() {
             if (articles[i].toLowerCase().replaceAll("__"," - ").replaceAll("_", " ").includes(currentValue.toLowerCase()) || currentValue == "")
             {
                 // Render blog
-                document.getElementById("blog").innerHTML = document.getElementById("blog").innerHTML + "<a href=\"/products/blogs/" + articles[i] + "\"><div class=\"blog\" id=\"blog-" + i + "\"><center><p class=\"blog\">" + articles[i].replaceAll("__"," - ").replaceAll("_", " ") + "</p></center>\n<img src=\"/products/blogs/" + articles[i] + "/logo.png\" class=\"blog-cover\"></div></a>";
+                document.getElementById("blog").innerHTML = document.getElementById("blog").innerHTML + "<a href=\"/blogs/" + articles[i] + "\"><div class=\"blog\" id=\"blog-" + i + "\"><center><p class=\"blog\">" + articles[i].replaceAll("__"," - ").replaceAll("_", " ") + "</p></center>\n<img src=\"/blogs/" + articles[i] + "/logo.png\" class=\"blog-cover\"></div></a>";
             }
         } 
     });
-    const currentValue = event.target.value;
     document.getElementById("blog").innerHTML = "";
     for (var i = 0; i < articles.length; i++ ) {
-        if (articles[i].toLowerCase().replaceAll("__"," - ").replaceAll("_", " ").includes(currentValue.toLowerCase()) || currentValue == "")
-        {
-            // Render blog
-            document.getElementById("blog").innerHTML = document.getElementById("blog").innerHTML + "<a href=\"/products/blogs/" + articles[i] + "\"><div class=\"blog\" id=\"blog-" + i + "\"><center><p class=\"blog\">" + articles[i].replaceAll("__"," - ").replaceAll("_", " ") + "</p></center>\n<img src=\"/products/blogs/" + articles[i] + "/logo.png\" class=\"blog-cover\"></div></a>";
-        }
+
+        // Render blog
+        document.getElementById("blog").innerHTML = document.getElementById("blog").innerHTML + "<a href=\"/blogs/" + articles[i] + "\"><div class=\"blog\" id=\"blog-" + i + "\"><center><p class=\"blog\">" + articles[i].replaceAll("__"," - ").replaceAll("_", " ") + "</p></center>\n<img src=\"/blogs/" + articles[i] + "/logo.png\" class=\"blog-cover\"></div></a>";
     } 
 }
 
