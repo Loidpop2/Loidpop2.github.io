@@ -25,6 +25,7 @@ nav.hotbar {
     scrollbar-width: none;
     scrollbar-color: transparent;
     scrollbar-base-color: transparent;
+    z-index: 100;
 }
 
 p.title {
