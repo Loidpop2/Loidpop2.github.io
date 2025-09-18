@@ -15,14 +15,28 @@ function hotbar_backgroundSelector() {
 }
 
 function searchbar_products() {
-    var articles = ["Unity_how_to/", "About_me"];
+    var articles = ["About_me", "Unity__How_to"];
     myInput = document.getElementById("search-products")
     myInput.addEventListener('input', function(event) {
         const currentValue = event.target.value;
+        document.getElementById("blog").innerHTML = "";
         for (var i = 0; i < articles.length; i++ ) {
-            
+            if (articles[i].toLowerCase().replaceAll("__"," - ").replaceAll("_", " ").includes(currentValue.toLowerCase()) || currentValue == "")
+            {
+                // Render blog
+                document.getElementById("blog").innerHTML = document.getElementById("blog").innerHTML + "<a href=\"/products/blogs/" + articles[i] + "\"><div class=\"blog\" id=\"blog-" + i + "\"><center><p class=\"blog\">" + articles[i].replaceAll("__"," - ").replaceAll("_", " ") + "</p></center>\n<img src=\"/products/blogs/" + articles[i] + "/logo.png\" class=\"blog-cover\"></div></a>";
+            }
         } 
     });
+    const currentValue = event.target.value;
+    document.getElementById("blog").innerHTML = "";
+    for (var i = 0; i < articles.length; i++ ) {
+        if (articles[i].toLowerCase().replaceAll("__"," - ").replaceAll("_", " ").includes(currentValue.toLowerCase()) || currentValue == "")
+        {
+            // Render blog
+            document.getElementById("blog").innerHTML = document.getElementById("blog").innerHTML + "<a href=\"/products/blogs/" + articles[i] + "\"><div class=\"blog\" id=\"blog-" + i + "\"><center><p class=\"blog\">" + articles[i].replaceAll("__"," - ").replaceAll("_", " ") + "</p></center>\n<img src=\"/products/blogs/" + articles[i] + "/logo.png\" class=\"blog-cover\"></div></a>";
+        }
+    } 
 }
 
 function page() {

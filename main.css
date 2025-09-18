@@ -38,6 +38,19 @@ p.main {
     font-size: 12px;
 }
 
+p.blog {
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 15px;
+    padding-top:5px;
+    padding-bottom:0px;
+    padding:10px;
+    margin:0px;
+    color:#111111;
+}
+
 p {
     font-family: "Quicksand", sans-serif;
     font-optical-sizing: auto;
@@ -168,6 +181,57 @@ input.text {
 div.blank {
     width: 0px;
     height: 0px;
+}
+
+div.blog-browser {
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 12px;
+    text-align: center;
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    border-radius: 4px;
+    display:inline-flex;
+    position: relative;
+    color:#d7dee0;
+    accent-color:#d7dee0;
+    background-color: #393939;
+    width:80%;
+    height:96px;
+}
+
+div.blog {
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 16px;
+    text-align: center;
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    border-radius: 4px;
+    position: relative;
+    color:#d7dee0;
+    accent-color:#d7dee0;
+    background-color: #8f8f8f;
+    width:auto;
+    height:80px;
+    margin-top:2px;
+    margin-right:2px;
+    margin-left:10px;
+}
+
+img.blog-cover {
+    display:inline;
+    width:90%;
+    height:55%;
+    object-fit: scale-down;
 }
 
 html {
