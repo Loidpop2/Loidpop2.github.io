@@ -36,7 +36,7 @@ function searchbar_blogs() {
     } 
 }
 
-function searchbar_blogs() {
+function searchbar_games() {
     var articles = ["Cat Cafe"];
     myInput = document.getElementById("search-games")
     myInput.addEventListener('input', function(event) {
