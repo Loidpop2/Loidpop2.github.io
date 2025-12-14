@@ -1,3 +1,5 @@
+// fancy ui
+
 function hotbar_backgroundSelector() {
     var chosen = false;
     for (var i = 0; i < document.getElementById("hotbar").childElementCount; i++) {
@@ -15,8 +17,11 @@ function hotbar_backgroundSelector() {
 }
 
 function searchbar_blogs() {
-    var articles = ["About_me", "Unity__How_to"];
-    myInput = document.getElementById("search-products")
+    var articles = ["About_me", "Unity__How_to", "Test_Poll"];
+    myInput = document.getElementById("search-products")    
+    if (!myInput) {
+        return; // not on the blogs page
+    }
     myInput.addEventListener('input', function(event) {
         const currentValue = event.target.value;
         document.getElementById("blog").innerHTML = "";
@@ -36,8 +41,110 @@ function searchbar_blogs() {
     } 
 }
 
+// startup calls
+
 function page() {
     hotbar_backgroundSelector();
     searchbar_blogs();
+    (async () => {
+        const pollId = "poll_favColor";
+
+        const existingVote = await getMyVote(pollId);
+        if (existingVote) {
+            selectOption(existingVote);
+        }
+
+        loadResults(pollId);
+    })();
 }
 
+// polls
+
+const SUPABASE_URL = "https://ibgyijifkczqokzjsmrc.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImliZ3lpamlma2N6cW9rempzbXJjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU3Mjg3ODksImV4cCI6MjA4MTMwNDc4OX0.Y6c5sRVn8e3WAOA9xNcM0jwwTwB5IwrNtZLhC3rJbAo";
+
+const supabaseClient = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+function getSessionId() {
+  let id = localStorage.getItem("poll_session");
+  if (!id) {
+    id = crypto.randomUUID();
+    localStorage.setItem("poll_session", id);
+  }
+  return id;
+}
+
+const sessionId = getSessionId();
+
+function selectOption(optionId) {
+  document
+    .querySelectorAll(".poll-option")
+    .forEach(btn => {
+      btn.classList.toggle(
+        "selected",
+        btn.dataset.option === optionId
+      );
+    });
+}
+
+async function submitVote(pollId, optionId) {
+  const { error } = await supabaseClient
+    .from("votes")
+    .upsert({
+      poll_id: pollId,
+      option_id: optionId,
+      session: sessionId
+    }, {
+      onConflict: "poll_id,session"
+    });
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  selectOption(optionId);
+  loadResults(pollId);
+}
+
+async function loadResults(pollId) {
+  const { data, error } = await supabaseClient
+    .from("votes")
+    .select("option_id")
+    .eq("poll_id", pollId);
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  const counts = {};
+
+  data.forEach(v => {
+    counts[v.option_id] = (counts[v.option_id] || 0) + 1;
+  });
+
+  document.querySelectorAll(".poll-option").forEach(btn => {
+    const option = btn.dataset.option;
+    const count = counts[option] || 0;
+    const label = document.getElementById(`count-${option}`);
+    if (label) {
+      label.textContent = `${count} vote${count === 1 ? "" : "s"}`;
+    }
+  });
+}
+
+
+async function getMyVote(pollId) {
+  const { data } = await supabaseClient
+    .from("votes")
+    .select("option_id")
+    .eq("poll_id", pollId)
+    .eq("session", sessionId)
+    .maybeSingle();
+
+  return data?.option_id ?? null;
+}

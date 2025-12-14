@@ -284,3 +284,48 @@ html {
     overflow:auto;
     overscroll-behavior: none; 
 }
+
+.poll-option {
+    font-family: "Quicksand", sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+
+    min-width: 90px;
+    height: 28px;
+
+    padding: 6px 10px;
+    margin: 6px;
+
+    border-radius: 10px;
+    border: none;
+
+    color: #d7dee0;
+    background-color: #1a1a1a;
+
+    cursor: pointer;
+    transition: 
+        background-color 0.15s ease,
+        box-shadow 0.15s ease,
+        transform 0.1s ease;
+}
+
+.poll-option:hover {
+    background-color: #363636;
+}
+
+.poll-option:active {
+    transform: scale(0.97);
+}
+
+.poll-option.selected {
+    background-color: #888888;
+    box-shadow: 
+        0 0 0 2px #dadada,
+        0 0 8px rgba(71, 71, 71, 0.4);
+}
+
+.poll-count {
+    font-size: 11px;
+    color: #272727;
+    margin-top: -2px;
+}
