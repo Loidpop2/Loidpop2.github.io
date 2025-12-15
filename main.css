@@ -92,6 +92,11 @@ a.hotbar-button {
     background-color: #000000;
     margin-right:6px;
     margin-right:37px;
+    cursor: pointer;
+    transition: 
+        background-color 0.15s ease,
+        box-shadow 0.15s ease,
+        transform 0.1s ease;
 }
 
 a.hotbar-button-this {
@@ -113,7 +118,28 @@ a.hotbar-button-this {
     color:#d7dee0;
     accent-color:#d7dee0;
     background-color: #3a3a3a;
-    margin-right:37px;
+    margin-right:37px;    
+    cursor: pointer;
+    transition: 
+        background-color 0.15s ease,
+        box-shadow 0.15s ease,
+        transform 0.1s ease;
+}
+
+a.hotbar-button:hover {
+    background-color: #363636;
+}
+
+a.hotbar-button:active {
+    transform: scale(0.97);
+}
+
+a.hotbar-button-this:hover {
+    background-color: #5a5a5a;
+}
+
+a.hotbar-button-this:active {
+    transform: scale(0.97);
 }
 
 a {
