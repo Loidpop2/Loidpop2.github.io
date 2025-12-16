@@ -17,7 +17,7 @@ function hotbar_backgroundSelector() {
 }
 
 function searchbar_blogs() {
-    var articles = ["About_me", "Unity__How_to", "Test_Poll"];
+    var articles = ["About_me", "Test_Poll"];
     myInput = document.getElementById("search-products")    
     if (!myInput) {
         return; // not on the blogs page
