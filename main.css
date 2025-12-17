@@ -278,7 +278,6 @@ div.blog {
     margin-top:2px;
     margin-right:6px;
     margin-left:7px;
-    
 }
 
 img.blog-cover {
@@ -354,4 +353,90 @@ html {
     font-size: 11px;
     color: #272727;
     margin-top: -2px;
+}
+
+input.generic-input {
+    font-family: "Quicksand", sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+
+    min-width: 540px;
+    height: 300px;
+
+    padding: 6px 10px;
+    margin: 6px;
+
+    border: none;
+    outline: none;
+    box-shadow: 0 0 10px #616c72;
+    border-radius: 15px;
+    width: 500px;
+
+    /* the point that i want to make */
+    padding: 5px 5px 280px 5px;
+    text-align: left;
+
+    color: #1a1a1a;
+    background-color: #d7dee0;
+    display:block;
+}
+
+button {
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 12px;
+    width: 70px;
+    text-align: center;
+    height: 30px;
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    border-radius: 10px;
+    position: relative;
+    color:#232323;
+    accent-color:#d7dee0;
+    background-color: #e7e7e7;
+    margin-right:6px;
+    cursor: pointer;
+    transition: 
+        background-color 0.15s ease,
+        box-shadow 0.15s ease,
+        transform 0.1s ease;
+}
+
+button:hover {
+    background-color: #d0d0d0;
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+div.feedback {
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 16px;
+    text-align: center;
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-top: 6px;
+    margin-top: 15px;
+    padding-bottom: 6px;
+    border-radius: 8px;
+    color:#d7dee0;
+    accent-color:#d7dee0;
+    background-color: #232323;
+    width:65%;
+    height:80px;
+    margin-right:6px;
+    margin: left 6px;
+}
+
+.response-list {
+    display:block;
 }

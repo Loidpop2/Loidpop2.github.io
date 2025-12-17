@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <title>Loidpop2 - Feedback</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/main.css">
+        <link rel="icon" type="image/png" href="/data/logo.png">
+    </head>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script type="text/javascript" src="/main.js"></script>
+    <nav class="hotbar" id="hotbar">
+        <a class="hotbar-button" href="/#Title">Home</a>
+        <a class="hotbar-button" href="/contact">Contact</a>
+        <a class="hotbar-button" href="/blogs">Blogs</a>
+    </nav>
+    <body onload='page()'>
+        <center>
+            <p class="title" id="Title">Feedback</p>
+        </center>
+        <div class="divider"></div>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;Hey! Do you have any ideas for projects I could work on? Or maybe a revision that needs to be made? Let me know here!</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;Just so you know, anyone can see all forms of feedback submitted below. You do not have to fill out your name, but I would appreciate it if you would!</p>
+        <div class="divider"></div>
+        <center>
+            <p class="title">Form</p><br>
+            <input id="form" class="generic-input">
+            <button onclick="submitVote('feedback',document.getElementById('form').value)">Submit</button>
+            <div id="responses"></div>
+        </center>
+        <div class="big-divider"></div>
+    </body>
+</html>
+    

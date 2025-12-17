@@ -17,7 +17,7 @@ function hotbar_backgroundSelector() {
 }
 
 function searchbar_blogs() {
-    var articles = ["About_me", "Test_Poll"];
+    var articles = ["About_me", "Test_Poll", "Feedback"];
     myInput = document.getElementById("search-products")    
     if (!myInput) {
         return; // not on the blogs page
@@ -47,7 +47,14 @@ function page() {
     hotbar_backgroundSelector();
     searchbar_blogs();
     (async () => {
-        const pollId = "poll_favColor";
+        const polls = [["Test_Poll","poll_favColor"],["Feedback","feedback"]];
+        var pollId;
+        for (var i = 0; i < polls.length; i++) {
+        if (document.URL.includes(polls[i][0]))
+        {
+            pollId = polls[i][1];
+        }
+    }
 
         const existingVote = await getMyVote(pollId);
         if (existingVote) {
@@ -135,6 +142,14 @@ async function loadResults(pollId) {
       label.textContent = `${count} vote${count === 1 ? "" : "s"}`;
     }
   });
+
+  
+  const responseList = document.getElementById("responses");
+  var responses = "";
+  data.forEach(v => {
+    responses = responses + `<div class="feedback">${v.option_id}</div>`
+  });
+  responseList.innerHTML = responses;
 }
 
 
