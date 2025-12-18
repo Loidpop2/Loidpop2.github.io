@@ -64,6 +64,7 @@ function page() {
             )});
         for (i in pollId)
         {
+
           var existingVote = [];
           existingVote[i] = await getMyVote(pollId[i]);
 
@@ -73,7 +74,7 @@ function page() {
           }
 
 
-          loadResults(pollId);
+          await loadResults(pollId);
         }
     })();
 }
