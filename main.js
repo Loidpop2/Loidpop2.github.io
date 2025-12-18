@@ -47,21 +47,34 @@ function page() {
     hotbar_backgroundSelector();
     searchbar_blogs();
     (async () => {
-        const polls = [["Test_Poll","poll_favColor"],["Feedback","feedback"]];
-        var pollId;
+        const polls = [["Test_Poll",["poll_favColor","poll_favColor_like"]],["Feedback",["feedback"]]];
+
         for (var i = 0; i < polls.length; i++) {
-        if (document.URL.includes(polls[i][0]))
+          if (document.URL.includes(polls[i][0]))
+          {
+              var pollId = polls[i][1];
+          }
+        }
+        document
+          .querySelectorAll(".poll-option")
+          .forEach(btn => {
+            btn.classList.toggle(
+              "selected",
+              false
+            )});
+        for (i in pollId)
         {
-            pollId = polls[i][1];
-        }
-    }
+          var existingVote = [];
+          existingVote[i] = await getMyVote(pollId[i]);
 
-        const existingVote = await getMyVote(pollId);
-        if (existingVote) {
-            selectOption(existingVote);
-        }
 
-        loadResults(pollId);
+          if (existingVote) {
+              selectOption(existingVote[i]);
+          }
+
+
+          loadResults(pollId);
+        }
     })();
 }
 
@@ -86,13 +99,15 @@ function getSessionId() {
 
 const sessionId = getSessionId();
 
+
+
 function selectOption(optionId) {
   document
     .querySelectorAll(".poll-option")
     .forEach(btn => {
       btn.classList.toggle(
         "selected",
-        btn.dataset.option === optionId
+        (btn.dataset.option === optionId || btn.classList.contains("selected"))
       );
     });
 }
@@ -101,7 +116,7 @@ async function submitVote(pollId, optionId) {
   const { error } = await supabaseClient
     .from("votes")
     .upsert({
-      poll_id: pollId,
+      poll_id: pollId[0],
       option_id: optionId,
       session: sessionId
     }, {
@@ -112,44 +127,62 @@ async function submitVote(pollId, optionId) {
     console.error(error);
     return;
   }
+  document
+    .querySelectorAll(".poll-option")
+    .forEach(btn => {
+      btn.classList.toggle(
+        "selected",
+        false
+      )});
+  for (i in pollId) {
+    selectOption(await getMyVote(pollId[i]));
+  }
 
-  selectOption(optionId);
   loadResults(pollId);
 }
 
 async function loadResults(pollId) {
-  const { data, error } = await supabaseClient
-    .from("votes")
-    .select("option_id")
-    .eq("poll_id", pollId);
+  var supabaseStuff = [];
+  for (i in pollId) {
+    const { data, error } = await supabaseClient
+      .from("votes")
+      .select("option_id")
+      .eq("poll_id", pollId[i]);
+    supabaseStuff[i] = { data, error }; 
 
-  if (error) {
-    console.error(error);
-    return;
+    if (error) {
+      console.error(error);
+      return;
+    }
   }
 
   const counts = {};
 
-  data.forEach(v => {
-    counts[v.option_id] = (counts[v.option_id] || 0) + 1;
-  });
+  for (i in supabaseStuff)
+  {
+    supabaseStuff[i].data.forEach(v => {
+      counts[v.option_id] = (counts[v.option_id] || 0) + 1;
+    });
 
-  document.querySelectorAll(".poll-option").forEach(btn => {
-    const option = btn.dataset.option;
-    const count = counts[option] || 0;
-    const label = document.getElementById(`count-${option}`);
-    if (label) {
-      label.textContent = `${count} vote${count === 1 ? "" : "s"}`;
+    document.querySelectorAll(".poll-option").forEach(btn => {
+      const option = btn.dataset.option;
+      const count = counts[option] || 0;
+      const label = document.getElementById(`count-${option}`);
+      if (label) {
+        label.textContent = `${count} vote${count === 1 ? "" : "s"}`;
+      }
+    });
+
+    
+    const responseList = document.getElementById("responses");
+    var responses = "";
+    supabaseStuff[i].data.forEach(v => {
+      responses = responses + `<div class="feedback">${v.option_id}</div>`
+    });
+    if (responseList) {
+      responseList.innerHTML = responses;
     }
-  });
-
-  
-  const responseList = document.getElementById("responses");
-  var responses = "";
-  data.forEach(v => {
-    responses = responses + `<div class="feedback">${v.option_id}</div>`
-  });
-  responseList.innerHTML = responses;
+  }
 }
 
 
@@ -159,7 +192,6 @@ async function getMyVote(pollId) {
     .select("option_id")
     .eq("poll_id", pollId)
     .eq("session", sessionId)
-    .maybeSingle();
-
+      .maybeSingle();
   return data?.option_id ?? null;
 }
