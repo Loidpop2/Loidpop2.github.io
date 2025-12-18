@@ -14,7 +14,7 @@
         <a class="hotbar-button" href="/contact">Contact</a>
         <a class="hotbar-button" href="/blogs">Blogs</a>
     </nav>
-    <body onload='page()'>
+    <body onload='page("poll_favColor")'>
         <center>
             <p class="title" id="Title">Test Poll</p>
         </center>
@@ -25,12 +25,16 @@
             <p class="title">What's your favorite color?</p><br>
             <button class="poll-option" style="color: #ffa2a2;" data-option="red"     onclick="submitVote('poll_favColor','red')">Red</button>
             <div class="poll-count" id="count-red">0 votes</div>
+            <button class="poll-option" style="color: #ffc4a2;" data-option="orange"  onclick="submitVote('poll_favColor','orange')">Orange</button>
+            <div class="poll-count" id="count-orange">0 votes</div>
             <button class="poll-option" style="color: #fffda2;" data-option="yellow"  onclick="submitVote('poll_favColor','yellow')">Yellow</button>
             <div class="poll-count" id="count-yellow">0 votes</div>
             <button class="poll-option" style="color: #a2ffbc;" data-option="green"   onclick="submitVote('poll_favColor','green')">Green</button>
             <div class="poll-count" id="count-green">0 votes</div>
             <button class="poll-option" style="color: #a2bbff;" data-option="blue"    onclick="submitVote('poll_favColor','blue')">Blue</button>
             <div class="poll-count" id="count-blue">0 votes</div>
+            <button class="poll-option" style="color: #e6a2ff;" data-option="purple"  onclick="submitVote('poll_favColor','purple')">Purple</button>
+            <div class="poll-count" id="count-purple">0 votes</div>
         </center>
     </body>
 </html>

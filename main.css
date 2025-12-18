@@ -432,7 +432,7 @@ div.feedback {
     accent-color:#d7dee0;
     background-color: #232323;
     width:65%;
-    height:80px;
+    min-height:80px;
     margin-right:6px;
     margin: left 6px;
 }
