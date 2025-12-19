@@ -440,3 +440,17 @@ div.feedback {
 .response-list {
     display:block;
 }
+
+code {
+    background-color: #272727;
+    width: 85%;
+    height:auto;
+    color:#cacaca;
+    display:block;
+    font-family: "Courier New", Courier, monospace;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 13px;
+    white-space: pre-wrap;
+
+}
