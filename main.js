@@ -178,7 +178,7 @@ async function loadResults(pollId) {
     const responseList = document.getElementById("responses");
     var responses = "";
     supabaseStuff[i].data.forEach(v => {
-      responses = responses + `<div class="feedback">${v.option_id}</div>`
+      responses = `<div class="feedback">${v.option_id}</div>` + responses 
     });
     if (responseList) {
       responseList.innerHTML = responses;

@@ -64,7 +64,7 @@ p {
     font-optical-sizing: auto;
     font-weight: 300;
     font-style: normal;
-    font-size: 12px;
+    font-size: 13px;
     padding-top:5px;
     padding-bottom:0px;
     padding:10px;
@@ -297,7 +297,7 @@ body {
     display: inline;
     position: static;
     padding:0px;
-    background-image:radial-gradient(circle at 0px 0px, #ffffff 20%, #000000 125%);
+    background-image: url("data/background.png");
     background-repeat: no-repeat;
     background-size: cover; 
     background-attachment: fixed;
