@@ -47,7 +47,7 @@ function page() {
     hotbar_backgroundSelector();
     searchbar_blogs();
     (async () => {
-        const polls = [["Test_Poll",["poll_favColor","poll_favColor_like"]],["Feedback",["feedback"]]];
+        const polls = [["Test_Poll",["poll_favColor","poll_favColor_like"]],["Feedback",["feedback"]],["Unity__Murder_Spree",["feedback__unity__murder_spree"]]];
 
         for (var i = 0; i < polls.length; i++) {
           if (document.URL.includes(polls[i][0]))
