@@ -21,7 +21,7 @@
         <div class="divider"></div>
         <p>&nbsp;&nbsp;&nbsp;&nbsp;Hello reader! Lately, I've been working on a project with Unity. Have you played games like Risk of Rain? It's a game like that, except it will have an estimated 790 trillion items! That's right— 790 <i>trillion</i>. Currently it has about 420 million, but because I used item <i>combinations</i>, I was able to get the size in just a few megabytes!</p>
         <p>&nbsp;&nbsp;&nbsp;&nbsp;Now, you're probably thinking— how on earth did I fit a few <i>trillion</i> items into a few <i>megabytes</i>? Well, I'll explain. Dotnet is what Unity runs off of— hence the C#— except... Dotnet is a coding language with <i>so many</i> libraries. I set up a system to compile code <i>during runtime</i>— meaning turn some variables into the code the computer can actually run and execute— and stored combinations of items in a JSON. Actually, I'll show you the JSON now— it'll make more sense then.</p>
-        <pre><code>
+        <center><pre><code>
 {
     "Name_1": [
         "", 
@@ -42,17 +42,47 @@
 
     "Condition_1": [
         {"_1": "While _c2;, _a;",                                                               
-            "_2": "bool trigger = false; if (_c2;) { trigger = true; } if (trigger) { _action; trigger = false; }"},
+            "_2": "bool trigger = false; if (_c2;) { trigger = true; } 
+                if (trigger) { _action; trigger = false; }"},
         {"_1": "Every _num2; seconds, _a;",                                                     
-            "_2": "if (checkpoint == 0f) { checkpoint = Time.time; } bool trigger = false; float elapsed = Time.time - checkpoint; if (!applied && elapsed % _num2; <= 4) { applied = false; trigger = true; _action; trigger = false; applied = true; } else if (applied && !(elapsed % _num2; <= 4)) { applied = false; }"},
+            "_2": "if (checkpoint == 0f) { checkpoint = Time.time; }
+                bool trigger = false;
+                float elapsed = Time.time - checkpoint; if (!applied && 
+                    elapsed % _num2; <= 4) { 
+                        applied = false; trigger = true; _action;
+                        trigger = false; applied = true; } 
+                    else if (applied && !(elapsed % _num2; <= 4)) 
+                        { applied = false; }"},
         {"_1": "Every _num1; minutes, _a;",                                                     
-            "_2": "if (checkpoint == 0f) { checkpoint = Time.time; } bool trigger = false; float elapsed = Time.time - checkpoint; if (!applied && elapsed % (_num1; * 60) <= 4) { applied = false; trigger = true; _action; trigger = false; applied = true; } else if (applied && !(elapsed % (_num1; * 60) <= 4)) { applied = false; }"},
+            "_2": "if (checkpoint == 0f) { checkpoint = Time.time; }
+                bool trigger = false;
+                float elapsed = Time.time - checkpoint; if (!applied && 
+                    elapsed % (_num1; * 60) <= 4) { 
+                        applied = false; trigger = true; 
+                            _action; trigger = false; applied = true; } 
+                    else if (applied && !(elapsed % (_num1; * 60) <= 4)) 
+                        { applied = false; }"},
         {"_1": "Every _num2; seconds, if _c2;, _a;",                                            
-            "_2": "if (checkpoint == 0f) { checkpoint = Time.time; } bool trigger = false; float elapsed = Time.time - checkpoint; if (!applied && elapsed % _num2; <= 4) { if (_c2;) { applied = false; trigger = true; _action; trigger = false; applied = true; } } else if (applied && !(elapsed % _num2; <= 4)) { applied = false; }"},
+            "_2": "if (checkpoint == 0f) { checkpoint = Time.time; }
+                bool trigger = false;
+                float elapsed = Time.time - checkpoint; if (!applied &&
+                    elapsed % _num2; <= 4) { 
+                        if (_c2;) { applied = false; trigger = true;
+                            _action; trigger = false; applied = true; } }
+                    else if (applied && !(elapsed % _num2; <= 4))
+                        { applied = false; }"},
         {"_1": "Every _num1; minutes, if _c2;, _a;",                                            
-            "_2": "if (checkpoint == 0f) { checkpoint = Time.time; } bool trigger = false; float elapsed = Time.time - checkpoint; if (!applied && elapsed % (_num1; * 60) <= 4) { if (_c2;) { applied = false; trigger = true; _action; trigger = false; applied = true; } } else if (applied && !(elapsed % (_num1; * 60) <= 4)) { applied = false; }"},
+            "_2": "if (checkpoint == 0f) { checkpoint = Time.time; }
+                bool trigger = false;
+                float elapsed = Time.time - checkpoint; if (!applied &&
+                    elapsed % (_num1; * 60) <= 4) { 
+                        if (_c2;) { applied = false; trigger = true;
+                            _action; trigger = false; applied = true; } } 
+                else if (applied && !(elapsed % (_num1; * 60) <= 4)) 
+                    { applied = false; }"},
         {"_1": "Every time you _act;, _a;",                                                     
-            "_2": "bool trigger = false; if (_act;) { trigger = true; _action; } trigger = false;"}
+            "_2": "bool trigger = false; if (_act;) { trigger = true;
+                _action; } trigger = false;"}
     ],
 
     "Condition_2": [
@@ -64,18 +94,23 @@
 
     "Ability_1": [
         {"_1": "grant the user _num1; speed, decaying in _num3; seconds.",                     
-            "_2": "Player.maxSpeed += _num1;; Invoke(\"decay\", _num3;);", "_3": "public void decay() { Player.maxSpeed -= _num1;; }"},
+            "_2": "Player.maxSpeed += _num1;; Invoke(\"decay\", _num3;);", 
+            "_3": "public void decay() { Player.maxSpeed -= _num1;; }"},
         {"_1": "grant the user _num2; sprint speed, decaying in _num3; seconds.",              
-            "_2": "Player.maxSprintSpeed += _num2;; Invoke(\"decay\", _num3;);", "_3": "public void decay() { Player.maxSprintSpeed -= _num2;; }"},
+            "_2": "Player.maxSprintSpeed += _num2;; Invoke(\"decay\", _num3;);", 
+            "_3": "public void decay() { Player.maxSprintSpeed -= _num2;; }"},
         {"_1": "grant the user _num1; damage, decaying in _num3; seconds.",                    
-            "_2": "Player.damageMult += _num1;; Invoke(\"decay\", _num3;);", "_3": "public void decay() { Player.damageMult -= _num1;; }"},
+            "_2": "Player.damageMult += _num1;; Invoke(\"decay\", _num3;);", 
+            "_3": "public void decay() { Player.damageMult -= _num1;; }"},
         {"_1": "grant the user _num2; max hp, decaying in _num3; seconds.",                    
-            "_2": "Player.maxHealth += _num2;; Invoke(\"decay\", _num3;);", "_3": "public void decay() { Player.maxHealth -= _num2;; }"},
+            "_2": "Player.maxHealth += _num2;; Invoke(\"decay\", _num3;);",
+            "_3": "public void decay() { Player.maxHealth -= _num2;; }"},
         {"_1": "heal _num2; hp.",                                                              
             "_2": "Player.health += _num2;;"},
         {"_1": "grant _num2; shield.",                                                         
             "_2": "Player.shield += _num2;;"},
-        {"_1": "shoot one _proj; at the _dist; enemy, with a cooldown of 0._num2; seconds.",
+        {"_1": "shoot one _proj; at the _dist; enemy, 
+            with a cooldown of 0._num2; seconds.",
             "_2": "Debug.Log(\"Todo\");"}
     ],
 
@@ -128,7 +163,7 @@
         ]
     }
 }
-        </code></pre>
+        </code></pre></center>
         <div class="divider"></div>
         <div class="big-divider"></div>
     </body>

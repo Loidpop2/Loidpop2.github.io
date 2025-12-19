@@ -452,5 +452,6 @@ code {
     font-style: normal;
     font-size: 13px;
     white-space: pre-wrap;
-
+    text-align: left;
+    padding: 2px 12px;
 }
