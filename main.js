@@ -119,7 +119,8 @@ async function submitVote(pollId, optionId) {
     .upsert({
       poll_id: pollId[0],
       option_id: optionId,
-      session: sessionId
+      session: sessionId,
+      instance: 0
     }, {
       onConflict: "poll_id,session"
     });
@@ -148,6 +149,7 @@ async function loadResults(pollId) {
     const { data, error } = await supabaseClient
       .from("votes")
       .select("option_id")
+      .order("created_at")
       .eq("poll_id", pollId[i]);
     supabaseStuff[i] = { data, error }; 
 
@@ -173,19 +175,43 @@ async function loadResults(pollId) {
         label.textContent = `${count} vote${count === 1 ? "" : "s"}`;
       }
     });
-
-    
-    const responseList = document.getElementById("responses");
-    var responses = "";
-    supabaseStuff[i].data.forEach(v => {
-      responses = `<div class="feedback">${v.option_id}</div>` + responses 
-    });
-    if (responseList) {
-      responseList.innerHTML = responses;
-    }
+  }
+  const responseList = document.getElementById("responses");
+  var responses = "";
+  supabaseStuff[i].data.forEach(v => {
+  responses = `<div class="feedback">${v.option_id}</div>` + responses;
+  });
+  if (responseList) {
+    responseList.innerHTML = responses;
   }
 }
 
+
+async function submitTextVote(pollId, text) {
+  const { error } = await supabaseClient
+    .from("votes")
+    .insert({
+      poll_id: pollId[0],
+      option_id: text
+    }, {
+      onConflict: "poll_id,session"
+    });
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  const polls = [["Test_Poll",["poll_favColor","poll_favColor_like"]],["Feedback",["feedback"]],["Unity__Murder_Spree",["feedback__unity__murder_spree"]]];
+
+  for (var i = 0; i < polls.length; i++) {
+    if (document.URL.includes(polls[i][0]))
+    {
+        var thing = polls[i][1];
+    }
+  }
+  loadResults(thing);
+}
 
 async function getMyVote(pollId) {
   const { data } = await supabaseClient
