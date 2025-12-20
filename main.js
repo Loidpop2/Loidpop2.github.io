@@ -120,7 +120,6 @@ async function submitVote(pollId, optionId) {
       poll_id: pollId[0],
       option_id: optionId,
       session: sessionId,
-      instance: 0
     }, {
       onConflict: "poll_id,session"
     });
