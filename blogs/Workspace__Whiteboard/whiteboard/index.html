@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>Loidpop2 - Whiteboard</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/main.css">
+        <link rel="stylesheet" href="../src/whiteboard.css">
+        <link rel="icon" type="image/png" href="/data/logo.png">
+    </head>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script type="text/javascript" src="/main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script type="text/javascript" src="../src/whiteboard.js"></script>
+    <nav class="hotbar" id="hotbar">
+        <a class="hotbar-button" href="/#Title">Home</a>
+        <a class="hotbar-button" href="/contact">Contact</a>
+        <a class="hotbar-button" href="/blogs">Blogs</a>
+    </nav>
+    <body onload="page_whiteboard()">
+        <center>
+            <p class="title" id="Title">Workspace - Whiteboard</p>
+        </center>
+        <div class="divider"></div>
+        <center>
+            <textarea spellcheck="false" id="input" class="coding-tool">note("Hello World!",5,5,10,10,rgb(239, 255, 19));</textarea>
+            <button onclick="importData('input', render)">Import</button>
+            <button onclick="saveTXT(document.getElementById('input').value, 'Whiteboard')">Export</button>
+        </center>
+        <div class="whiteboard" id="whiteboard"></div>
+        <div class="big-divider"></div>
+    </body>
+</html>

@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <title>Loidpop2 - Whiteboard</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/main.css">
+        <link rel="icon" type="image/png" href="/data/logo.png">
+    </head>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script type="text/javascript" src="/main.js"></script>
+    <nav class="hotbar" id="hotbar">
+        <a class="hotbar-button" href="/#Title">Home</a>
+        <a class="hotbar-button" href="/contact">Contact</a>
+        <a class="hotbar-button" href="/blogs">Blogs</a>
+    </nav>
+    <body>
+        <center>
+            <p class="title" id="Title">Workspace - Whiteboard</p>
+        </center>
+        <div class="divider"></div>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;Hey, reader! Currently, I'm testing out a system for a sort of white board that <i>you</i> can use on the site! Maybe you want to jot down some ideas? Or just brainstorm for a school project? Check this out!</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;Now, from the looks of it, you might be thinking— I don't know how to code! Well, that's ok. I'll teach you! Okay, maybe you weren't thinking that— and now you're probably wondering what <i>coding</i> has to do with a <i>whiteboard</i>. I don't blame you, but trust me when I say this— it's worth it to learn how to use this tool.</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;Okay, but this blog is just reading so far. Where's the actual tool? If you want to skip the docs, or have used it before, the tool is <a href="./whiteboard">right here.</a> Otherwise, I <i>highly</i> reccomend you read this blog post first.</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;Now, first thing's first— where do I even type the code? Well, you'll want to go to the <a href="./whiteboard/">whiteboard tool</a> in a new tab to actually use this, but you should keep this tab open so you can read up. Now, let's begin!</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;Ok, let's learn about the functions you can use to illustrate your ideas. The first one is "note". Now, similar to how it sounds, it basically puts a sticky note on your whiteboard. How do you use it? That's where syntax comes in. Now if you already know what syntax is, you can probably just skip forward a bit– if not, though, let me teach you.</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;Alright, what's syntax exactly? It's basically the format of how you run code. Okay, wait, but didn't I say this was just a whiteboard system? Again, it is, but it's not like you're coding it from the bottom up. Here's an example of a whiteboard that you can make with just a few lines of code:</p>
+        <center><img src="./src/ex1.png" class="normal"></center>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;So... how do you go about making that? Again, syntax. It's better if I give you an example, yeah?</p>
+        <center><pre><code>note("Hello World!",5,5,10,10,rgb(239, 255, 19));</code></pre></center>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;Ok, maybe that's a little misleading. Those commas divide different variables- or parameters in this case- that get sent to the "note" function, which, in turn, tells it what to do. Here's what each of the variables do:</p>
+        <center><pre><code>note("text",posx,posy,width,height,rgb(red,green,blue));</code></pre></center>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;Alright, that's more clear. But in the example, there's images and fonts and all that... how do you use those? Well, syntax doesn't just imply that one "note" function- it applies to <i>every</i> function. For example, the "image" function has it's own syntax, like so:</p>
+        <center><pre><code>image("https://d22l0cevb7ryns.cloudfront.net/wp-content/uploads/2020/07/Messier-782-28-20True-Color.jpg",5,20,10);</code></pre></center>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;Again, I'll cut to the chase- here's what each parameter means:</p>
+        <center><pre><code>image("url",posx,posy,resolution);</code></pre></center>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;Okay, wait, what? What's the URL? All a URL does is just point to an online resource, just like how "https://google.com" brings you to Google. But... what URL do you put? How do you direct a URL to an image? My tactic is to go to Google, find an image I like, right click it, click "Copy Link Address" (this puts the URL onto your clipboard), then paste it (CTRL + V typically) where I need the URL to go. Make sense? Perfect.</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;Well, where do you even go to program your whiteboard? Right <a href="./whiteboard/">here</a>, or you can click the big button at the top of this blog for easier access.</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;Before you go, though, you're probably going to want to know all of the functions. Here's a quick table of all of them, along with their syntax. Now, go create!</p>
+        <table>
+            <tr>
+                <td>Function</td>
+                <td>Syntax</td>
+            </tr>
+            <tr>
+                <td>note</td>
+                <td>note(text, posx, posy, width, height, rgb(red,green,blue));</td>
+            </tr>
+            <tr>
+                <td>image</td>
+                <td>image(url, posx, posy, scale);</td>
+            </tr>
+            <tr>
+                <td>text</td>
+                <td>text(text, posx, posy, fontsize, rgb(red,green,blue));</td>
+            </tr>
+            <tr>
+                <td>font</td>
+                <td>font(fontID)</td>
+            </tr>
+        </table>
+        
+        <div class="big-divider"></div>
+    </body>
+</html>

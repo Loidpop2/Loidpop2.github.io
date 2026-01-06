@@ -17,7 +17,7 @@ function hotbar_backgroundSelector() {
 }
 
 function searchbar_blogs() {
-    var articles = ["About_me", "Test_Poll", "Feedback", "Unity__Murder_Spree"];
+    var articles = ["About_me", "Test_Poll", "Feedback", "Unity__Murder_Spree","Workspace__Whiteboard"];
     myInput = document.getElementById("search-products")    
     if (!myInput) {
         return; // not on the blogs page
@@ -220,4 +220,35 @@ async function getMyVote(pollId) {
     .eq("session", sessionId)
       .maybeSingle();
   return data?.option_id ?? null;
+}
+
+// exporting files
+
+function saveTXT(valueinput, filename) {
+    let blobdtMIME =
+        new Blob([valueinput], { type: "text/plain" })
+    let url = URL.createObjectURL(blobdtMIME)
+    let anele = document.createElement("a")
+    anele.setAttribute("download", filename);
+    anele.href = url;
+    anele.click();
+}
+
+async function importData(idOfOutput, whatFunction) {
+  let input = document.createElement('input');
+  input.type = 'file';
+  input.onchange = _ => {
+            let files =   Array.from(input.files);
+            files[0].text().then((text) => {
+              const importedText = text;
+              document.getElementById(idOfOutput).value = importedText;
+
+              if (whatFunction) {
+                whatFunction(importedText);
+              }
+            }).catch((error) => {
+              console.error("Error reading file:", error);
+            });
+        };
+  input.click();
 }
