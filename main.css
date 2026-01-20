@@ -297,7 +297,7 @@ body {
     display: inline;
     position: static;
     padding:0px;
-/*    background-image: url("data/background.png"); */
+    background-image: url("data/background.png");
     background-repeat: no-repeat;
     background-size: cover; 
     background-attachment: fixed;
