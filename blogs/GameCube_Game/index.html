@@ -1,0 +1,178 @@
+<html>
+    <head>
+        <title>Loidpop2 - About Me</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/main.css">
+        <link rel="icon" type="image/png" href="/data/logo.png">
+    </head>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script type="text/javascript" src="/main.js"></script>
+    <nav class="hotbar" id="hotbar">
+        <a class="hotbar-button" href="/#Title">Home</a>
+        <a class="hotbar-button" href="/contact">Contact</a>
+        <a class="hotbar-button" href="/blogs">Blogs</a>
+    </nav>
+    <body onload='page()'>
+        <center>
+            <p class="title" id="Title">GameCube Game</p>
+        </center>
+        <div class="divider"></div>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;(This is for a school project)</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;The topic I'd like to share is the process I've used to create a GameCube game for one of my electives. Throughout my life, I've been proficient in programming, mainly C# (C-Sharp), Python, Java, JavaScript, HTML, CSS, and a few other mainline languages. However, I've yet to explore things like C, C++ (C-Plus-Plus), and Assembly. Lately, I've been curious about the Nintendo GameCube from 2001. It has incredibly restrictive hardware limitations, which made me wonder how detailed games like Super Mario Sunshine or Pikmin were even possible. For reference, the console has 40 Megabytes of RAM, a 458MHz processor, and a 9.4 gigaflop graphics processor. In comparison, an MacBook Air (M2) has 400 times more RAM, roughly 7.7 times more processing power, and almost 383 times more powerful graphics. So I started wondering... how did people make games that look modern even today with such confined hardware?</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;Well, what better way to understand this than to make one myself and keep optimizing it?</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;First, I had to teach myself C. In short, it's a universal language that most, if not all, computers can understand. It's very simple but also incredibly versatile. This is also the coding language used for GameCube games, and practically every other video game in retro gaming libraries, aside from Assembly, though C is just an elaborated form of that.</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;Once I understood the syntax- or the grammar of a coding language- I... got stuck. Computer graphics are, in short, triangles and individual pixels. I knew that, since it's common knowledge for those who make video games, but most people use platforms like Unity or Unreal Engine to make a game, which lets them bypass the need to write entire algorithms just to draw a green square on the screen. With modern technology, you click a button, and your computer creates a tree in the world you designed. With the GameCube... well, why don't I show you?</p>
+        <center><pre><code>
+#include <stdlib.h>
+#include <string.h>
+#include <malloc.h>
+#include <math.h>
+#include <gccore.h>
+
+GXRModeObj *screenMode;
+static void *frameBuffer;
+static vu8 readyForCopy;
+#define FIFO_SIZE (256*1024)
+
+void update_screen(Mtx viewMatrix);
+static void copy_buffers(u32 unused);
+
+void draw(s16 vertices[], u8 colors[]) {
+    GX_ClearVtxDesc();
+    GX_SetVtxDesc(GX_VA_POS, GX_INDEX8);
+    GX_SetVtxDesc(GX_VA_CLR0, GX_INDEX8);
+    GX_SetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_POS_XYZ, GX_S16, 0);
+    GX_SetVtxAttrFmt(GX_VTXFMT0, GX_VA_CLR0, GX_CLR_RGBA, GX_RGBA8, 0);
+    GX_SetArray(GX_VA_POS, vertices, 3*sizeof(s16));
+    GX_SetArray(GX_VA_CLR0, colors, 4*sizeof(u8));
+    GX_SetNumChans(1);
+    GX_SetNumTexGens(0);
+    GX_SetTevOrder(GX_TEVSTAGE0, GX_TEXCOORDNULL, GX_TEXMAP_NULL, GX_COLOR0A0);
+    GX_SetTevOp(GX_TEVSTAGE0, GX_PASSCLR);
+}
+
+int x = 0;
+int y = 0;
+
+int main(void)
+{
+    Mtx view;
+    Mtx44 projection;
+    PADStatus pads[4];
+    GXColor backgroundColor = {255, 255, 255, 255};
+    void *fifoBuffer = NULL;
+    
+    VIDEO_Init();
+    
+    screenMode = VIDEO_GetPreferredMode(NULL);
+
+    PAD_Init();
+    frameBuffer = MEM_K0_TO_K1(SYS_AllocateFramebuffer(screenMode));
+
+    VIDEO_Configure(screenMode);
+    VIDEO_SetNextFramebuffer(frameBuffer);
+    VIDEO_SetPostRetraceCallback(copy_buffers);
+    VIDEO_SetBlack(FALSE);
+    VIDEO_Flush();
+
+    fifoBuffer = MEM_K0_TO_K1(memalign(32,FIFO_SIZE));
+    memset(fifoBuffer, 0, FIFO_SIZE);
+
+    GX_Init(fifoBuffer, FIFO_SIZE);
+    GX_SetCopyClear(backgroundColor, 0x00ffffff);
+    GX_SetViewport(0,0,screenMode->fbWidth,screenMode->efbHeight,0,1);
+    GX_SetDispCopyYScale((f32)screenMode->xfbHeight/(f32)screenMode->efbHeight);
+    GX_SetScissor(0,0,screenMode->fbWidth,screenMode->efbHeight);
+    GX_SetDispCopySrc(0,0,screenMode->fbWidth,screenMode->efbHeight);
+    GX_SetDispCopyDst(screenMode->fbWidth,screenMode->xfbHeight);
+    GX_SetCopyFilter(screenMode->aa,screenMode->sample_pattern,
+        GX_TRUE,screenMode->vfilter);
+    GX_SetFieldMode(screenMode->field_rendering,
+        ((screenMode->viHeight==2*screenMode->xfbHeight)?GX_ENABLE:GX_DISABLE));
+
+    GX_SetCullMode(GX_CULL_NONE);
+    GX_CopyDisp(frameBuffer,GX_TRUE);
+    GX_SetDispCopyGamma(GX_GM_1_0);
+
+    guVector camera = {0.0F, 0.0F, 0.0F};
+    guVector up = {0.0F, 1.0F, 0.0F};
+    guVector look = {0.0F, 0.0F, -1.0F};
+
+    guPerspective(projection, 60, 1.33F, 10.0F, 300.0F);
+    GX_LoadProjectionMtx(projection, GX_PERSPECTIVE);
+
+
+
+    while(SYS_MainLoop())
+    {
+        GX_SetCopyClear(backgroundColor, 0x00ffffff);
+        guLookAt(view, &camera, &up, &look);
+        GX_SetViewport(0,0,screenMode->fbWidth,screenMode->efbHeight,0,1);
+        GX_InvVtxCache();
+        GX_InvalidateTexAll();
+        update_screen(view);
+        PAD_Read(pads);
+        if (pads[0].button & PAD_BUTTON_RIGHT) {
+            x+=1;
+        }
+        if (pads[0].button & PAD_BUTTON_LEFT) {
+            x-=1;
+        }
+        if (pads[0].button & PAD_BUTTON_UP) {
+            y+=1;
+        }
+        if (pads[0].button & PAD_BUTTON_DOWN) {
+            y-=1;
+        }
+        draw((s16[]){0+x, 8+y, 0, -5+x, -2+y, 0, 5+x, -2+y, 0}, (u8[]){0, 255, 255, 255, 255, 0, 255, 255, 0, 0, 255, 255});
+    }          
+    return 0;
+}
+
+void update_screen( Mtx viewMatrix )
+{
+    Mtx modelView;
+    
+    guMtxIdentity(modelView);
+    guMtxTransApply(modelView, modelView, 0.0F, 0.0F, -50.0F);
+    guMtxConcat(viewMatrix,modelView,modelView);
+    
+    GX_LoadPosMtxImm(modelView, GX_PNMTX0);
+
+    GX_Begin(GX_TRIANGLES, GX_VTXFMT0, 3);
+
+    GX_Position1x8(0);
+    GX_Color1x8(0);
+    GX_Position1x8(1);
+    GX_Color1x8(1);
+    GX_Position1x8(2);
+    GX_Color1x8(2);
+    
+    GX_End();
+
+    GX_DrawDone();
+    readyForCopy = GX_TRUE;
+
+    VIDEO_WaitVSync();
+ return;
+}
+
+static void copy_buffers(u32 count __attribute__ ((unused)))
+{
+    if (readyForCopy==GX_TRUE) {
+        GX_SetZMode(GX_TRUE, GX_LEQUAL, GX_TRUE);
+        GX_SetColorUpdate(GX_TRUE);
+        GX_CopyDisp(frameBuffer,GX_TRUE);
+        GX_Flush();
+        readyForCopy = GX_FALSE;
+    }
+}
+        </code></pre></center>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;Yeah, I don't expect you to read all that. Just know... it took a while. It's not as simple as telling your computer "make a triangle." But the results were... satisfying, to say the least.</p>
+        <center><img src="./src/ex1.png" class="normal"></center>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;Yeah, okay, what's so cool about a triangle on the screen? Well... you can define the position of each corner, you can set the color of each corner which automatically creates a gradient, you can move it up, down, left and right using the D-Pad, and it's set up to accept parameters, meaning I can make it draw a tall, red triangle or a short, blue one just by changing a few numbers.</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;But... how does that translate into making a game? Well, from this point, I can use these triangles to draw objects, like a person or a tree or a building. It's a long process, yes, but it's the groundwork for making any video game. Modern approaches just simplify it, only needing you to click a button and ask AI to make you a tree. But that's not how you're supposed to make games.</p>
+    </body>
+</html>
