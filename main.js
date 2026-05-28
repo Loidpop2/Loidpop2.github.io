@@ -79,10 +79,10 @@ function page() {
     })();
 }
 
-// polls
+// api requests
 
-const SUPABASE_URL = "https://ibgyijifkczqokzjsmrc.supabase.co";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImliZ3lpamlma2N6cW9rempzbXJjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU3Mjg3ODksImV4cCI6MjA4MTMwNDc4OX0.Y6c5sRVn8e3WAOA9xNcM0jwwTwB5IwrNtZLhC3rJbAo";
+const SUPABASE_URL = "https://osyscnuyvvtrovmaiulp.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9zeXNjbnV5dnZ0cm92bWFpdWxwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc2NTU3MzgsImV4cCI6MjA5MzIzMTczOH0.7Wt7NCq4f9Is9ymIiQtuVBblo3XHwaJRAxQrFXdoWqs";
 
 const supabaseClient = supabase.createClient(
   SUPABASE_URL,
