@@ -2,22 +2,24 @@
 
 function hotbar_backgroundSelector() {
     var chosen = false;
+    var f = null;
     for (var i = 0; i < document.getElementById("hotbar").childElementCount; i++) {
         e = document.getElementsByClassName("hotbar-button")[i];
-        if (document.URL.includes(e.getAttribute("href")))
-        {
-            e.className = "hotbar-button-this";
-            chosen = true;
-        }
-        console.log(i);
+        console.log(i+1);
         console.log(e.getAttribute("href"));
         console.log(e);
+        if (document.URL.includes(e.getAttribute("href")))
+        {
+            f = e;
+            chosen = true;
+        }
     }
+    if (chosen == true) { f.className = "hotbar-button-this"; }
     if (chosen == false) { document.getElementsByClassName("hotbar-button")[0].className = "hotbar-button-this"; }
 }
 
 function searchbar_blogs() {
-    var articles = ["About_me", "Test_Poll", "Feedback", "Unity__Murder_Spree", "GameCube_Game"];
+    var articles = ["About_me", "Test_Poll", "Unity__Murder_Spree", "GameCube_Game"];
     myInput = document.getElementById("search-products")    
     if (!myInput) {
         return; // not on the blogs page
@@ -47,7 +49,7 @@ function page() {
     hotbar_backgroundSelector();
     searchbar_blogs();
     (async () => {
-        const polls = [["Test_Poll",["poll_favColor","poll_favColor_like"]],["Feedback",["feedback"]],["Unity__Murder_Spree",["feedback__unity__murder_spree"]]];
+        const polls = [["Test_Poll",["poll_favColor","poll_favColor_like"]],["feedback",["feedback"]],["Unity__Murder_Spree",["feedback__unity__murder_spree"]]];
 
         for (var i = 0; i < polls.length; i++) {
           if (document.URL.includes(polls[i][0]))
