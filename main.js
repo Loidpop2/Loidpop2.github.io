@@ -3,7 +3,7 @@
 function hotbar_backgroundSelector() {
     var chosen = false;
     var f = null;
-    for (var i = 0; i < document.getElementById("hotbar").childElementCount; i++) {
+    for (var i = 0; i < document.getElementById("hotbar").childElementCount-1; i++) {
         e = document.getElementsByClassName("hotbar-button")[i];
         console.log(i+1);
         console.log(e.getAttribute("href"));
@@ -46,7 +46,9 @@ function searchbar_blogs() {
 // startup calls
 
 function page() {
+    //hotbar
     hotbar_backgroundSelector();
+    //blogs 
     searchbar_blogs();
     (async () => {
         const polls = [["Test_Poll",["poll_favColor","poll_favColor_like"]],["feedback",["feedback"]],["Unity__Murder_Spree",["feedback__unity__murder_spree"]]];
@@ -211,7 +213,7 @@ async function submitTextVote(pollId, text) {
         var thing = polls[i][1];
     }
   }
-  loadResults(thing);
+  loadResults(pollId);
 }
 
 async function getMyVote(pollId) {
@@ -253,4 +255,26 @@ async function importData(idOfOutput, whatFunction) {
             });
         };
   input.click();
+}
+
+
+// dark / light theme stuff
+
+const savedTheme = localStorage.getItem("theme");
+
+if (savedTheme) {
+    document.documentElement.classList.toggle("dark", savedTheme === "dark");
+} else {
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    document.documentElement.classList.toggle("dark", prefersDark);
+}
+
+function theme() {
+    document.documentElement.classList.toggle("dark");
+
+    if (document.documentElement.classList.contains("dark")) {
+        localStorage.setItem("theme", "dark");
+    } else {
+        localStorage.setItem("theme", "light");
+    }
 }
