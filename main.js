@@ -277,4 +277,6 @@ function theme() {
     } else {
         localStorage.setItem("theme", "light");
     }
+
+    window.location.reload();
 }
