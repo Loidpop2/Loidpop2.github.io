@@ -38,6 +38,7 @@ nav.hotbar {
     scrollbar-base-color: transparent;
     z-index: 100;
     display:block;
+    top:0px;
 }
 
 p.title {
