@@ -404,7 +404,7 @@ html {
 
 .poll-count {
     font-size: 11px;
-    color: #272727;
+    color: var(--text);
     margin-top: -2px;
 }
 
